@@ -1,0 +1,5 @@
+Flask
+anthropic>=0.4.0
+python-dotenv
+
+#pip install Flask python-dotenv
