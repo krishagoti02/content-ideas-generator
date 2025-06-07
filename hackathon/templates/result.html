@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="book">
+        {% set pages = [title] + ['Life Themes:\n' + '\n'.join(themes)] + ['Chapter Outline:\n' + '\n'.join(chapters)] + [sample_chapter] %}
+        {% for content in pages %}
+        <div class="page">
+            <div class="front">
+                <div class="content">
+                    <p>{{ content.replace('\n', '<br>') | safe }}</p>
+                </div>
+            </div>
+            <div class="back">
+                <div class="content"></div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if results.get('photos') %}
+        <div class="page">
+          <div class="front">
+            <div class="content">
+              <h3>📸 Photo Gallery</h3>
+              {% for img in results['photos'] %}
+                <img src="{{ url_for('static', filename='uploads/' + img) }}" style="max-width: 100%; margin-bottom: 1rem;">
+              {% endfor %}
+            </div>
+          </div>
+          <div class="back"><div class="content"></div></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="flip-controls">
+        <button id="prev">⬅ Prev</button>
+        <button id="next">Next ➡</button>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.page');
+        let currentPage = 0;
+
+        function updatePages() {
+            pages.forEach((page, index) => {
+                if (index <= currentPage) {
+                    page.classList.add('flipped');
+                } else {
+                    page.classList.remove('flipped');
+                }
+            });
+        }
+
+        document.getElementById('next').addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePages();
+            }
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePages();
+            }
+        });
+
+        updatePages();
+    </script>
+</body>
+</html>
