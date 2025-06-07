@@ -77,12 +77,6 @@ The Content Ideas Generator helps you turn a description of your experience into
 Project by Krisha Goti and team  
 Built during the **Anthropic x USC Claude Hackathon**
 
----
-
-## 📸 Demo
-
-Watch our video walkthrough on YouTube:  
-[https://www.youtube.com/watch?v=W4Db5s8UO7g&t=1s](https://www.youtube.com/watch?v=W4Db5s8UO7g&t=1s)
 
 ---
 
